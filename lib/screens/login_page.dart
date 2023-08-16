@@ -4,6 +4,7 @@ import 'package:chat_app/components/login_btn.dart';
 import 'package:chat_app/components/login_text_field.dart';
 import 'package:chat_app/constant/colors.dart';
 import 'package:chat_app/screens/chat_page.dart';
+import 'package:chat_app/screens/cubits/chat_cubit/chat_cubit.dart';
 import 'package:chat_app/screens/cubits/login_cubit/login_cubit.dart';
 import 'package:chat_app/screens/register_page.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,7 @@ class LoginPage extends StatelessWidget {
           isLoading = true;
         } else if (state is LoginSuccess) {
           isLoading = false;
+          BlocProvider.of<ChatCubit>(context).getMessages();
           Navigator.pushNamed(context, ChatPage.id, arguments: email);
         } else if (state is LoginFailure) {
           ScaffoldMessenger.of(context).showSnackBar(
